@@ -4,7 +4,12 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import concurrent.futures
-from utils import action_play_game, getUserDataDir, chrome_driver_path
+from utils import (
+    action_play_game,
+    getUserDataDir,
+    chrome_driver_path,
+    sort_data_by_user_id,
+)
 
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.support import expected_conditions as EC
@@ -67,4 +72,8 @@ def run_profile(i):
 
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=numberThreads) as executor:
-    executor.map(run_profile, range(1, countProject + 1))
+    executor.map(run_profile, range(6, countProject + 1))
+
+sort_choice = input("Bạn có muốn thực hiện sort không? (y/n): ")
+if sort_choice.lower() == "y":
+    sort_data_by_user_id()
